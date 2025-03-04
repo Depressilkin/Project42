@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: flex;
+            background-color: darkcyan;
+            border: solid 2px;
+            padding: 10px;
+        }
+        #container>div{
+            margin: 5px;
+        }
+        .content>div{
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="null">HTML</div>
+        <div class="first" name="two">CSS</div>
+        <div class="second">Java Script</div>
+    </div>
+    <div class="content">
+        <div class="null"><h2>HTML</h2><p>Lorem ipsum dolor sit elit.</p></div>
+        <div class="first"><h2>CSS</h2><p>Lorem amet consectetur adipisicing elit.</p></div>
+        <div class="second"><h2>Java Script</h2><p>Lorem elit.</p></div>
+    </div>
+    
+<script src="jquery-3.7.1.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

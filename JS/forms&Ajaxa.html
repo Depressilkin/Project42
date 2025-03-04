@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            width: 200px;
+            
+        }
+        input{
+            display:flex;
+            position: relative;
+            float: left;;
+        }
+    </style>
+</head>
+<body>
+<!--
+    <form action="/" method="GET">
+        <input type="submit" value="submit">
+    </form>
+    <form action="" method="GET">
+        <input type="text">
+        <input type="checkbox">
+        <input type="submit" value="submit">
+    </form>
+    <form action="/" method="GET">
+        <input type="submit" value="submit">
+    </form>
+
+    <div class="container">
+        <form action="">
+            <div class="login">
+                <label for="login">Login:</label>
+                <input type="text" name="login" id="login">
+            </div>
+            <div class="password">
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </div>
+            <div class="check">
+                <label for="check">Remember me </label>
+                <input type="checkbox" name="check" id="checkbox">
+            </div>
+            <input type="submit" value="Sign in" id="submit">
+        </form>
+        <script>
+            const login = document.getElementById('login');
+            const checkbox = document.getElementById('checkbox')
+            const btn = document.getElementById('submit')
+
+            document.addEventListener('submit', function mssg(){
+                alert(`Hello, ${login.value}!`)
+                if (checkbox.checked){
+                    alert('Remember')
+                } else{
+                    alert('Not Remember')
+                }
+            })
+
+<div class="container">
+    <form>
+        <div class="email">
+            <label for="email" id="labelEmail">Login:</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+        <div class="password">
+            <label for="password" id="labelPassword">Password:</label>
+            <input type="password" name="password"  id='password' required>
+        </div>
+        <div class="repeat">
+            <label for="repeat" id="labelRepeat">Repeat:</label>
+            <input type="password" name="repeat" id='repeat' required>
+        </div>
+        <input type="button" value="Sign in" id="submit">
+
+    </form>
+</div>
+<script>
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const repeat = document.getElementById('repeat');
+    const btn = document.getElementById('submit');
+    const labelEmail = document.getElementById('labelEmail')
+    const labelPassword = document.getElementById('labelPassword')
+    const labelRepeat = document.getElementById('labelRepeat')
+
+    const emailPattern = /^[a-z0-9_\.]{3,}@[a-z]+\.[a-z]{2,6}/;
+    const passwordPattern = /^[a-zA-Z0-9]{6,}$/;
+
+
+    btn.addEventListener('click', function rex(){
+        if(emailPattern.test(email.value)){
+            labelEmail.innerHTML = 'Email:'
+            if (passwordPattern.test(password.value)){
+                labelPassword.innerHTML = 'Password:'
+                if (password.value == repeat.value){
+                    labelRepeat.innerHTML = 'Repeat:'
+                    alert('')
+                    return false
+                }else{
+                    labelRepeat.innerHTML = 'Repeat: password must match'
+                }
+            }else{
+                labelPassword.innerHTML = 'Password: Wrong password';
+            }
+        }else{
+            labelEmail.innerHTML = 'Email: Wrong email address';
+        }
+    })
+
+
+
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Company</th>
+    </thead>
+    <tr>
+        <td>Bill</td>
+        <td>Gates</td>
+        <td>Google</td>
+    </tr>
+    <tr>
+        <td>Team</td>
+        <td>Cook</td>
+        <td>Apple</td>
+    </tr>
+    <tr>
+        <td>Joe</td>
+        <td>Byden</td>
+        <td>USA</td>
+    </tr>
+    <tr>
+        <td>Elon</td>
+        <td>Musk</td>
+        <td>Tesla</td>
+    </tr>
+</table>
+
+<script>
+    document.addEventListener('mouseover', function(event){
+        if(event.target.nodeName == 'TD'){
+            event.target.style.backgroundColor = 'black'
+        }
+        //event.target.style.backgroundColor = 'black'
+    })
+    document.addEventListener('mouseout', function(event){
+        if(event.target.nodeName == 'TD'){
+            event.= target.style.backgroundColor = ''
+        }
+    })
+
+<script>
+
+    let person = {
+        name : 'Joe',
+        age : 82,
+        status: true,
+        achiev: ['president', 'grandfather'],
+        son: { name: 'Hunter', age: 52, achiev:null},
+        logic: true,
+        func : function f(){
+            return true
+        }
+    }
+    console.log(person)
+    function checkLogic(key, value){
+        if (key === 'logic' && value != true){
+            return  undefined;
+        }
+        return value;
+        }
+    
+    let personToJSON = JSON.stringify(person,checkLogic,1);
+    //console.log(person);
+    console.log(personToJSON);
+    console.log(JSON.parse(personToJSON));
+    console.log(JSON.parse('{"name": "Joe"}'));
+
+       
+    
+</script>
+
+
+<div class="container">
+    <div>
+        <label><span>Enter JSON data</span><span id="mssg-error">[formatt error]</span></label>
+        <textarea id="input-text"></textarea>
+    </div>
+    <div>
+        <input type="button" value=">" id="btn">
+    </div>
+    <div>
+        <label>Formatted JSON data</label>
+        <textarea id="output-text"></textarea>
+    </div>
+</div>
+
+const inputText = document.getElementById('input-text');
+const btn = document.getElementById('btn');
+const outputText = document.getElementById('output-text');
+const errorText = document.getElementById('mssg-error');
+btn.addEventListener('click', function trans(event){
+    let content = inputText.value;
+    try{
+        let contentObj = JSON.parse(content);
+        content = JSON.stringify(contentObj,null,1);
+        console.log(content);
+        outputText.innerHTML = content;
+        errorText.style.display = 'none';
+    }catch{
+        errorText.style.display = 'block';
+    }
+})
+
+<script>
+
+for (let i=1; i<7; ++i){
+    let request;
+    if(window.XMLHttpRequest){
+        request = new XMLHttpRequest();
+    }
+    else{
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    request.open("GET", `https://swapi.dev/api/people/${i}`);
+    request.onloadend = function (){
+        let hero = JSON.parse(request.response)
+        console.log(hero.name)
+    }
+    request.send()
+}
+
+
+
+request.send()
+
+</script>
+-->
+
+
+<div>
+    <h2>All hero</h2>
+    <div class="container">
+        <input type="button" value="Luke Skywalker"></input>
+        <input type="button" value="C-3PO"></input>
+        <input type="button" value="Darth Vader"></input>
+        <input type="button" value="Leia Organa"></input>
+        <input type="button" value="R2-D2"></input>
+        <input type="button" value="Owen Lars"></input>
+    </div>
+</div>
+</body>
+</html>

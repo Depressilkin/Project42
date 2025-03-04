@@ -1,0 +1,98 @@
+<!--DOM-->
+<!--Cтруктура дом
+<ul>
+    <li id="first">Item1</li>
+    <li>
+        <p class="second">Text</p>
+        <a href="#">Link</a>
+    </li>
+    <li>Item3</li>
+</ul>
+ul = document.body.childNodes[0]
+ul.childNodes[3]
+li = ul.childNodes[3]
+li.childNodes-->
+<!--Обращение к элементам DOM
+
+    const first = document.getElementById('first');
+    const li = document.querySelector('li');
+    const li2 = document.querySelector('.second');
+    const li3 = document.querySelector('#first');
+    const li4 = document.querySelectorAll('li');
+-->
+<!--Удаление элемент из DOM
+
+    const delChild = document.getElementById('first');
+    const parent = document.querySelector('ul')
+    parent.removeChild(delChild)
+-->
+
+<!--Добавление элемента в DOM
+
+    const newLi = document.createElement('li')
+    newLi.style.backgroundColor = 'black'
+    const parent = document.querySelector('ul')
+    parent.appendChild(newLi)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: flex;
+            margin: 10px;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="0" style="background-color: red;"></div>
+        <div id="1" style="background-color: black;"></div>
+        <div id="2" style="background-color: grey;"></div>
+    </div>
+    <input type="button" value="add" id="btn">
+    <script>
+        const btn = document.getElementById('btn');
+        const container = document.getElementById('container');
+
+        btn.addEventListener('click',addBlock);
+        container.addEventListener('click',function delBlock(event){
+            const idBlock = (event.target.id);
+            container.removeChild(document.getElementById(`${idBlock}`))})
+    
+ 
+        let blockId = 3
+        function addBlock(){
+            const newBlock = document.createElement('div');
+            newBlock.id = blockId;
+            ++blockId;
+            newBlock.style.backgroundColor = '#' + getpallet();
+            container.appendChild(newBlock);
+
+        };
+ 
+        function getpallet() {
+                let color = Math.floor(Math.random()*16777215)
+                color = color.toString(16)
+                return color
+            }
+
+    </script>
+    -->
+<script>
+    const a = 11;
+    //const b = 6;
+    try{
+        console.log(a-b)
+    }catch{
+      alert('ERROR')  
+    }
+
+</script>
+
+</body>
+</html>
