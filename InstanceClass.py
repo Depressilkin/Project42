@@ -229,7 +229,7 @@ class ForeignPassport(Passport):
          self.visa[location] = False
  
 person = ForeignPassport('Joe', 'Byden', '30.7.1987', 'USA', '3425647875')
-person.open_visa('Russia')
+.open_visa('Russia')
 person.open_visa('China')
 print(person.visa)
 person.closed_visa('Russia')
@@ -242,4 +242,4 @@ print(person.visa)
 #методы и поля
 
 # атрибуты: название или имя, тип, наличие шерсти, среда обитания
-# методы: голос, способ питания.
+# методы: голос, способ питания.person
