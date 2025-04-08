@@ -105,7 +105,7 @@ class Stack:
     head = None
     tail = None
     length = 0
-    max_length = 5
+    #max_length = 5
 
     def stack_append(self, value):
         if self.length < self.max_length:
