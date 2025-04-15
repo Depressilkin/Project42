@@ -1,0 +1,4 @@
+USA:Wash-on
+Japan:Tokio
+Cyprus:Cyprus
+USSR:Moscow

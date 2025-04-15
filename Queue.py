@@ -95,9 +95,8 @@
 #Требуется создать реализации для операций над элементами очереди:
 #■ IsEmpty — проверка очереди на пустоту.
 #■ IsFull — проверка очереди на заполнение.
-#  PullHighestPriorityElementудаление элемента с самым высоким приоритетом из очереди.
-#■ InsertWithPriority — добавление элемента c приоритетом в очередь.
-#■ -
+#  PullHighestPriorityElementудаление элемента с самым высоким приоритетом из очереди.+
+#■ InsertWithPriority — добавление элемента c приоритетом в очередь.+
 #мым высоким приоритетом из очереди.
 #■ Peek — возврат самого большого по приоритету элемента. Обращаем ваше внимание, что элемент не
 #удаляется из очереди.
@@ -151,21 +150,43 @@ class PriorityQueue:
                     return f'элемент добавлен'
                 else:
                     current_node = current_node.next_node
-            
-            current_node.prev_node = Node(task, priority, prev_node=current_node)
-            # добавить связь с предыдущим!!!
-
+            if priority < current_node.priority:
+                current_node.prev_node.next_node = current_node.prev_node =  Node(task, priority, next_node=current_node, prev_node = current_node.prev_node)
+            else:
+                current_node.next_node = Node(task, priority, prev_node=current_node) 
             self.length += 1
             return f'элемент добавлен'
         else:
             return f'Добавление невозможно! Очередь заполнена'
 
+    def pull_highest_priority_element(self):
+        try:
+            if self.length > 1:
+                self.head = self.head.next_node
+                del self.head.prev_node
+            else:
+                del self.head
+            self.length -= 1
+        except:
+            print('Очередь пуста')
+
+    def peek(self):
+        if self.length != 0:
+            print(f'#{self.head.priority}# {self.head.task}.')
+            return f'#{self.head.priority}# {self.head.task}.'
+        else:
+            print('Очередь пуста')
 
 todo = PriorityQueue()
 todo.insert_with_priority('задание 1', 2)
 todo.insert_with_priority('задание 2', -1)
-todo.insert_with_priority('задание 3', 1.2)
-todo.show()
+todo.insert_with_priority('задание 4', 0.7)
+todo.insert_with_priority('задание 5', 0.9)
+todo.insert_with_priority('задание 5', 3)
+todo.pull_highest_priority_element()
+todo.pull_highest_priority_element()
+todo.peek()
+#todo.show()
 
 
 
