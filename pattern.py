@@ -115,13 +115,16 @@ class Logger:
     def log_extrem_digits(self, maxx, minx):
         self.logging(f'Выполнен Поиск максимального и минимального. Макс {maxx}, мин {minx}')
 
+    def log_render(self, list_digits):
+        self.logging(f'Выполнен рендер массива {list_digits}, макс.элемент {max(list_digits)} и мин.элемента {min(list_digits)}')
+
 class Digits:
     def __init__(self, path='Digits.txt', logger=None):
         array = input('Введите числа через пробел')
         self.path = path
         self.logger = logger
         self.list_digits = list(map(int, array.split(' ')))
-        with open(path, 'a') as file:
+        with open(path, 'a', encoding='utf-8') as file:
             for digit in self.list_digits:
                 file.write(str(digit)+'\n')
         logger.log_input_digits()
@@ -129,12 +132,16 @@ class Digits:
     def get_extrem(self):
         maxx = max(self.list_digits)
         minx = min(self.list_digits)
-        with open(self.path, 'a') as file:
+        with open(self.path, 'a', encoding='utf-8') as file:
             file.write(f'Максимальный элемень  {maxx}, Минимальный {minx}')
         self.logger.log_extrem_digits(maxx, minx)
+
+    def render(self):
+        print(f'Массив чисел: {self.list_digits}.\nMax: {max(self.list_digits)}, min: {min(self.list_digits)}')
+        self.logger.log_render(self.list_digits)
 
 logger = Logger()
 print(logger)
 array = Digits(logger=logger)
 array.get_extrem()
-#ДОДЕЛАТЬ
+array.render()
