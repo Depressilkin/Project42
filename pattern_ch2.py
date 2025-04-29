@@ -149,14 +149,122 @@ class Group:
         else:
             raise StopIteration
     
-    def add_student(self, student):
-        self.list_students.append(student)
+    def add_student(self, name, age):
+        self.list_students.append(Student(name, age))
     
-std1, std2, std3 = Student('Joe', 15), Student('Leo', 19), Student('Max', 15)
-group1 = Group('Python42')
-group1.add_student(std1)
-group1.add_student(std2)
-group1.add_student(std3)
-print('Группа', group1.name)
-for student in group1:
-    print(student.name, student.age)
+    def delete_student(self, name_student):
+        for index_student in range(len(self.list_students)):
+            if self.list_students[index_student].name == name_student:
+                student = self.list_students[index_student]
+                self.list_students.pop(index_student)
+                del student
+                return self.list_students
+
+    def update(self, new_name):
+        self.name = new_name
+        return self
+
+    def render_group(self):
+        print(f'Group "{self.name}"')
+        num = 1
+        for student in self.list_students:
+            print(f'{num}. {student.name}, age {student.age}')
+            num += 1
+
+class Academy:
+    def __init__(self, name):
+        self.name = name
+        self.list_groups = []
+        self.index = 0
+    
+    def __iter__(self):
+        self.index = 0
+        return self
+    
+    def __next__(self):
+        if self.index < len(self.list_groups):
+            product = self.list_groups[self.index]
+            self.index += 1
+            return product
+        else:
+            raise StopIteration
+    
+    def add_group(self, name):
+        self.list_groups.append(Group(name))
+    
+    def delete_group(self, name_group):
+        for index_group in range(len(self.list_groups)):
+            if self.list_groups[index_group].name == name_group:
+                group = self.list_groups[index_group]
+                self.list_groups.pop(index_group)
+                del group
+                return self.list_groups
+
+    def add_student(self, name_group, name_student, age_student):
+        for group in self.list_groups:
+            if name_group == group.name:
+                group.add_student(name_student, age_student)
+
+
+academy = Academy('TOP')
+
+while True:
+    print('МЕНЮ')
+    menu = input('1-добавить группу\
+                 \n2-добавить студента в группу\
+                 \n3-вывод групп\n4-вывод списка группы\
+                 \n5-удалить группу\n6-удалить студента\
+                 \n7-изменить инфо группы\
+                 \n8-изменить инфо студента\
+                 \n0-выход')
+    if menu == '1':
+        name_group = input('Введите название группы')
+        academy.add_group(name_group)
+    elif menu == '2':
+        info = input('Введите название группы, имя студента, возраст через запятую')
+        name_group, name_student, age_student = info.split(',')
+        academy.add_student(name_group, name_student, age_student)
+    elif menu == '3':
+        print(f'Академия {academy.name}, {academy.list_groups}')
+        for group in academy:
+            print(group.name)
+    elif menu == '4':
+        name_group = input('Введите название группы')
+        for group in academy:
+            if group.name == name_group:
+                group.render_group()
+                break
+        else:
+            print('такой группы нет')
+    
+    elif menu == '5':
+        name_group = input('Введите название группы')
+        academy.delete_group(name_group)
+    
+    elif menu == '6':
+        name_group, name_student = input('Введите через запятую название группы и имя студента').split(',')
+        for group in academy:
+            if group.name == name_group:
+                group.delete_student(name_student)
+                break
+        else:
+            print('Группа не найдена')
+    
+    elif menu == '7':
+        name_group = input('Введите название группы')
+        new_name_group = input('Введите новое название группы')
+        for group in academy:
+            if group.name == name_group:
+                group.update(new_name_group)
+    
+    elif menu == '8':
+        name_group, name_student = input('Введите через запятую название группы и имя студента').split(',')
+        for group in academy:
+            if group.name == name_group:
+                for student in group:
+                    if name_student == student.name:
+                        student.update()
+
+    elif menu == '0':
+        print('Конец программы')
+        break
