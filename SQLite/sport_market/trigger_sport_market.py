@@ -17,16 +17,18 @@ INSERT INTO deal(id_product, sale, quantity, date, id_worker, id_client) VALUES 
     data = cursor.fetchall()
     print(data)
 
-
-#BEGIN
-#    IF EXISTS (
-#        SELECT 1 
-#        FROM clients 
-#        WHERE 
-#            full_name = NEW.full_name 
-#            AND email = NEW.email
-#    ) THEN
-#        RAISE EXCEPTION 'Клиент с такими ФИО и email уже существует';
-#    END IF;
-#    RETURN NEW;
-#END;
+#super_joe@mail
+    cursor.execute('''
+CREATE TRIGGER prevent_duplicate_email_update
+BEFORE UPDATE ON client
+FOR EACH ROW
+BEGIN
+    SELECT
+    CASE
+        WHEN EXISTS (
+            SELECT * FROM client WHERE email = NEW.email AND OLD.id != id
+        ) THEN
+            RAISE(ABORT, 'Email уже существует')
+    END;
+END;
+''')
